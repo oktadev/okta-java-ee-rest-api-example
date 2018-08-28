@@ -23,7 +23,7 @@
     <artifactId>java-ee-rest-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>java-ee-rest-api TomEE Webapp</name>
+    <name>Java EE Webapp with JAX-RS API</name>
     <url>http://tomee.apache.org</url>
 
     <properties>
@@ -33,7 +33,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <openjpa.version>3.0.0</openjpa.version>
-        <tomee.javaee.api>7.0-1</tomee.javaee.api>
+        <tomee-javaee-api.version>7.0-1</tomee-javaee-api.version>
         <tomee.version>7.0.4</tomee.version>
         <okta-jwt.version>0.3.0</okta-jwt.version>
     </properties>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.apache.tomee</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>${tomee.javaee.api}</version>
+            <version>${tomee-javaee-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
