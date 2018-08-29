@@ -35,7 +35,6 @@
         <openjpa.version>3.0.0</openjpa.version>
         <tomee-javaee-api.version>7.0-1</tomee-javaee-api.version>
         <tomee.version>7.0.4</tomee.version>
-        <okta-jwt.version>0.3.0</okta-jwt.version>
     </properties>
 
     <dependencies>
@@ -46,9 +45,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.okta.jwt</groupId>
-            <artifactId>okta-jwt-verifier</artifactId>
-            <version>${okta-jwt.version}</version>
+            <groupId>org.pac4j</groupId>
+            <artifactId>j2e-pac4j</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-oidc</artifactId>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
 
