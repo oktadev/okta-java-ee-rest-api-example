@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.RequestHeaderRequestMatcher;
 
 import java.util.Collections;
 import java.util.List;
@@ -43,13 +44,18 @@ public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .oauth2Login()
-                .clientRegistrationRepository(clientRegistrationRepository())
-                .authorizedClientService(authorizedClientService())
-                .and()
             .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
+            /*.oauth2Login()
+                .clientRegistrationRepository(clientRegistrationRepository())
+                .authorizedClientService(authorizedClientService())
+                .and()*/
+            .oauth2().resourceServer()
+                .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys")
+                .and().
+                and()
+            .requestMatcher(new RequestHeaderRequestMatcher("Authorization"))
             .authorizeRequests()
                 .antMatchers("/**/*.{js,html,css}").permitAll()
                 .anyRequest().authenticated();

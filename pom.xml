@@ -36,7 +36,7 @@
         <tomee-javaee-api.version>7.0-1</tomee-javaee-api.version>
         <tomee.version>7.0.4</tomee.version>
         <okta-jwt.version>0.3.0</okta-jwt.version>
-        <spring-security.version>5.1.0.M2</spring-security.version>
+        <spring-security.version>5.1.0.RC1</spring-security.version>
         <jackson.version>2.9.6</jackson.version>
     </properties>
 
@@ -65,6 +65,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-client</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
         <dependency>
