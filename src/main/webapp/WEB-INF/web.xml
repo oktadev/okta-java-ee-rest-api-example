@@ -3,10 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    <display-name>j2e-pac4j-demo</display-name>
+    <display-name>javaee-pac4j-demo</display-name>
 
     <absolute-ordering/>
 
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>callbackFilter</filter-name>
         <filter-class>org.pac4j.j2e.filter.CallbackFilter</filter-class>
@@ -38,7 +42,7 @@
         </init-param>
         <init-param>
             <param-name>clients</param-name>
-            <param-value>oidcClient</param-value>
+            <param-value>oidcClient,headerClient</param-value>
         </init-param>
         <init-param>
             <param-name>authorizers</param-name>
