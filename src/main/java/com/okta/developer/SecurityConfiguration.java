@@ -53,8 +53,8 @@ public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception 
                 .and()*/
             .oauth2().resourceServer()
                 .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys")
-                .and().
-                and()
+                .and()
+                .and()
             .requestMatcher(new RequestHeaderRequestMatcher("Authorization"))
             .authorizeRequests()
                 .antMatchers("/**/*.{js,html,css}").permitAll()
