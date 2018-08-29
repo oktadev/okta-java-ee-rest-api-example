@@ -21,8 +21,8 @@ You will need to create an OIDC Application in Okta to get your settings to perf
 2. Navigate to **Applications** and click on **Add Application**.
 3. Select **Web** and click **Next**. 
 4. Give the application a name (.e.g., `Java EE Secure API`) and add the following as Login redirect URIs:
-  * `http://localhost:8080/login/oauth2/code/okta	`
-  * `http://localhost:8080/callback?client_name=OidcClient`
+    * `http://localhost:8080/login/oauth2/code/okta	`
+    * `http://localhost:8080/callback?client_name=OidcClient`
 4. Click **Done**, then edit the project and enable "Implicit (Hybrid)" as a grant type and click **Save**.
 
 <!-- todo: add additional instructions -->
