@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <div class="ui-container">
+        <p>Found  <h:outputText value="#{profileView.profiles.size()}"/> profiles.</p>
+        <h:panelGroup layout="block" rendered="#{profileView.profiles.size() > 0}">
+            <p>First profile:  <h:outputText value="#{profileView.profile}"/></p>
+        </h:panelGroup>
+    </div>
+
+    <h:panelGroup layout="block" rendered="#{not empty profileView.profile}">
+        <h2>Profile Details</h2>
+        <p><h:outputText value="Id: #{profileView.profile.id}"/></p>
+        <p><h:outputText value="Type Id: #{profileView.profile.typedId}"/></p>
+        <p><h:outputText value="Remembered: #{profileView.profile.remembered}"/></p>
+        <h3>Attributes (<h:outputText value="#{profileView.profile.attributes.size()}"/>)</h3>
+        <h:panelGroup layout="block" rendered="#{profileView.profile.attributes.size() > 0}">
+            <ul>
+                <ui:repeat value="#{profileView.profile.attributes.keySet().toArray()}" var="attributeName">
+                    <li><h:outputText value="#{attributeName}"/>: <h:outputText value="#{profileView.profile.attributes.get(attributeName)}"/> </li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
+        <h3>Roles (<h:outputText value="#{profileView.profile.roles.size()}"/>)</h3>
+        <h:panelGroup layout="block" rendered="#{profileView.profile.roles.size() > 0}">
+            <ul>
+                <ui:repeat value="#{profileView.profile.roles.toArray()}" var="role">
+                    <li><h:outputText value="#{role}"/></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
+        <h3>Permissions (<h:outputText value="#{profileView.profile.permissions.size()}"/>)</h3>
+        <h:panelGroup layout="block" rendered="#{profileView.profile.permissions.size() > 0}">
+            <ul>
+                <ui:repeat value="#{profileView.profile.permissions.toArray()}" var="permission">
+                    <li><h:outputText value="#{permission}"/></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
+    </h:panelGroup>
+</ui:composition>

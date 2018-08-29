@@ -33,15 +33,15 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <openjpa.version>3.0.0</openjpa.version>
-        <tomee-javaee-api.version>7.0-1</tomee-javaee-api.version>
-        <tomee.version>7.0.4</tomee.version>
+        <javaee-api.version>7.0</javaee-api.version>
+        <tomee.version>7.0.5</tomee.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.tomee</groupId>
+            <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>${tomee-javaee-api.version}</version>
+            <version>${javaee-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -65,33 +65,6 @@
                 <configuration>
                     <context>ROOT</context>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.openjpa</groupId>
-                <artifactId>openjpa-maven-plugin</artifactId>
-                <version>${openjpa.version}</version>
-                <configuration>
-                    <includes>**/entities/*.class</includes>
-                    <excludes>**/entities/XML*.class</excludes>
-                    <addDefaultConstructor>true</addDefaultConstructor>
-                    <enforcePropertyRestrictions>true</enforcePropertyRestrictions>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>enhancer</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.openjpa</groupId>
-                        <artifactId>openjpa</artifactId>
-                        <version>${openjpa.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

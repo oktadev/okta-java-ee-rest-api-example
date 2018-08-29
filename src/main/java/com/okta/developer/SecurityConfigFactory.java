@@ -4,6 +4,9 @@ import org.pac4j.core.client.Clients;
 import org.pac4j.core.client.direct.AnonymousClient;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.config.ConfigFactory;
+import org.pac4j.core.credentials.TokenCredentials;
+import org.pac4j.core.profile.CommonProfile;
+import org.pac4j.http.client.direct.HeaderClient;
 import org.pac4j.oidc.client.OidcClient;
 import org.pac4j.oidc.config.OidcConfiguration;
 import org.pac4j.oidc.profile.OidcProfile;
@@ -20,7 +23,6 @@ public class SecurityConfigFactory implements ConfigFactory {
         oidcConfiguration.setDiscoveryURI("https://dev-737523.oktapreview.com/oauth2/default/.well-known/openid-configuration");
         oidcConfiguration.setUseNonce(true);
         final OidcClient<OidcProfile, OidcConfiguration> oidcClient = new OidcClient<>(oidcConfiguration);
-        oidcClient.setName("jee");
         oidcClient.setAuthorizationGenerator((ctx, profile) -> { profile.addRole("ROLE_ADMIN"); return profile; });
 
         final Clients clients = new Clients("http://localhost:8080/callback", oidcClient, new AnonymousClient());

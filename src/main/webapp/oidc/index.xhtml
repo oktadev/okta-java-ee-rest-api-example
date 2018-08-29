@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Pac4J Java EE Demo - Protected Area</ui:define>
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="ui-container">
+                    <h1>Protected Area</h1>
+                    <p><h:link value="Back" outcome="/index"/></p>
+                </div>
+                <ui:include src="/WEB-INF/facelets/includes/pac4j-profiles-list.xhtml"/>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

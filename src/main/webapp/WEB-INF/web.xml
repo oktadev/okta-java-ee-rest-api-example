@@ -1,38 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         metadata-complete="true">
-    <display-name>javaee-rest-api</display-name>
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>j2e-pac4j-demo</display-name>
 
     <absolute-ordering/>
-
-    <filter>
-        <filter-name>corsFilter</filter-name>
-        <filter-class>com.okta.developer.CorsFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>corsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>OidcFilter</filter-name>
-        <filter-class>org.pac4j.j2e.filter.SecurityFilter</filter-class>
-        <init-param>
-            <param-name>configFactory</param-name>
-            <param-value>com.okta.developer.SecurityConfigFactory</param-value>
-        </init-param>
-        <init-param>
-            <param-name>authorizers</param-name>
-            <param-value>securityHeaders</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>OidcFilter</filter-name>
-        <url-pattern>/oidc/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
 
     <filter>
         <filter-name>callbackFilter</filter-name>
@@ -57,38 +30,25 @@
     </filter-mapping>
 
     <filter>
-        <filter-name>mustBeAuthFilter</filter-name>
+        <filter-name>OidcFilter</filter-name>
         <filter-class>org.pac4j.j2e.filter.SecurityFilter</filter-class>
         <init-param>
+            <param-name>configFactory</param-name>
+            <param-value>com.okta.developer.SecurityConfigFactory</param-value>
+        </init-param>
+        <init-param>
             <param-name>clients</param-name>
-            <param-value>AnonymousClient</param-value>
+            <param-value>oidcClient</param-value>
         </init-param>
         <init-param>
             <param-name>authorizers</param-name>
-            <param-value>mustBeAuth</param-value>
+            <param-value>securityHeaders</param-value>
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>mustBeAuthFilter</filter-name>
-        <url-pattern>/logout</url-pattern>
+        <filter-name>OidcFilter</filter-name>
+        <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>logoutFilter</filter-name>
-        <filter-class>org.pac4j.j2e.filter.LogoutFilter</filter-class>
-        <init-param>
-            <param-name>defaultUrl</param-name>
-            <param-value>/?defaulturlafterlogout</param-value>
-        </init-param>
-        <init-param>
-            <param-name>destroySession</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>logoutFilter</filter-name>
-        <url-pattern>/logout</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 </web-app>
