@@ -16,8 +16,8 @@ import java.io.IOException;
 public class JwtFilter implements Filter {
     private JwtVerifier jwtVerifier;
 
-	@Override
-	public void init(FilterConfig filterConfig) {
+    @Override
+    public void init(FilterConfig filterConfig) {
         try {
             jwtVerifier = new JwtHelper()
                     .setIssuerUrl("https://dev-737523.oktapreview.com/oauth2/default")
@@ -29,14 +29,14 @@ public class JwtFilter implements Filter {
         }
     }
 
-	@Override
-	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain chain) throws IOException, ServletException {
-	    HttpServletRequest request = (HttpServletRequest) servletRequest;
-	    HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         System.out.println("In JwtFilter, path: " + request.getRequestURI());
 
-		// Get access token from authorization header
+        // Get access token from authorization header
         String authHeader = request.getHeader("authorization");
         if (authHeader == null) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access denied.");
@@ -53,10 +53,10 @@ public class JwtFilter implements Filter {
             }
         }
 
-		chain.doFilter(request, response);
-	}
+        chain.doFilter(request, response);
+    }
 
-	@Override
-	public void destroy() {
-	}
+    @Override
+    public void destroy() {
+    }
 } 
