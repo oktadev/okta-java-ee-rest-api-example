@@ -42,6 +42,12 @@ This example uses the following open source libraries:
 * [Spring Security](https://spring.io/projects/spring-security)
 * [Pac4j for J2E](https://github.com/pac4j/j2e-pac4j)
 
+This project contains code from the following Apache-licensed projects:
+
+* [Apache TomEE JAX-RS Starter Project](https://github.com/tomitribe/tomee-jaxrs-starter-project) 
+* [TomEE Maven Archetype](http://tomee.apache.org/tomee-mp-getting-started.html)
+* [J2E Pac4j CDI Demo](https://github.com/pac4j/j2e-pac4j-cdi-demo)
+
 ## Help
 
 Please post any questions as comments on the [blog post](), or visit our [Okta Developer Forums](https://devforum.okta.com/). You can also email developers@okta.com if you'd like to create a support ticket.
