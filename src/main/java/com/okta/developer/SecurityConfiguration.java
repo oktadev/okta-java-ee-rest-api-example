@@ -1,12 +1,13 @@
 package com.okta.developer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.security.config.annotation.authentication.builders.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -14,7 +15,9 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.RequestHeaderRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,35 +36,36 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.env = env;
     }
 
-
-    /*@Autowired
-public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    auth
-        .inMemoryAuthentication()
-            .withUser("user").password("{noop}password").roles("USER");
-}*/
-
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
-            /*.oauth2Login()
-                .clientRegistrationRepository(clientRegistrationRepository())
-                .authorizedClientService(authorizedClientService())
-                .and()*/
-            .oauth2().resourceServer()
-                .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys")
+            .cors() // this does not work
                 .and()
-                .and()
-            .requestMatcher(new RequestHeaderRequestMatcher("Authorization"))
             .authorizeRequests()
                 .antMatchers("/**/*.{js,html,css}").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+            .oauth2Login()
+                .clientRegistrationRepository(clientRegistrationRepository())
+                .authorizedClientService(authorizedClientService());
+                /*.and()
+            .oauth2().resourceServer()
+                .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys");*/
     }
 
-    // Excellent info on oauth2Login(): https://www.baeldung.com/spring-security-5-oauth2-login
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedMethods(Collections.singletonList("GET"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Bean
     public OAuth2AuthorizedClientService authorizedClientService() {
         return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
