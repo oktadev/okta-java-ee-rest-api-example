@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -39,6 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .and()
             .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
@@ -50,10 +54,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .oauth2Login()
                 .clientRegistrationRepository(clientRegistrationRepository())
-                .authorizedClientService(authorizedClientService());
-                /*.and()
-            .oauth2().resourceServer()
-                .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys");*/
+                .authorizedClientService(authorizedClientService())
+                .and()
+            .oauth2()
+                .resourceServer()
+                    .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys");
     }
 
     @Bean
