@@ -21,6 +21,7 @@
         <spring-security.version>5.1.0.RC1</spring-security.version>
         <spring.version>5.1.0.RC2</spring.version>
         <jackson.version>2.9.6</jackson.version>
+        <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
     </properties>
 
     <dependencyManagement>
