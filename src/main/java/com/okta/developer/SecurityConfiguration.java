@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClient
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.ClientRegistrations;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
@@ -90,21 +91,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         String REGISTRATION_KEY = "spring.security.oauth2.client.registration.";
         String clientId = env.getProperty(REGISTRATION_KEY + client + ".client-id");
         String clientSecret = env.getProperty(REGISTRATION_KEY + client + ".client-secret");
-
         String PROVIDER_KEY = "spring.security.oauth2.client.provider.";
-        String authorizationUri = env.getProperty(PROVIDER_KEY + client + ".user-authorization-uri");
-        String tokenUri = env.getProperty(PROVIDER_KEY + client + ".access-token-uri");
-        String userInfoUri = env.getProperty(PROVIDER_KEY + client + ".user-info-uri");
-        String jwkSetUri = env.getProperty(PROVIDER_KEY + client + ".jwk-set-uri");
-
-        if (client.equals("okta")) {
-            return CommonOAuth2Provider.OKTA.getBuilder(client)
-                    .clientId(clientId).clientSecret(clientSecret)
-                    .authorizationUri(authorizationUri)
-                    .tokenUri(tokenUri)
-                    .userInfoUri(userInfoUri)
-                    .jwkSetUri(jwkSetUri).build();
-        }
-        return null;
+        String issuerUri = env.getProperty(PROVIDER_KEY + client + ".issuer-uri");
+        return ClientRegistrations.fromOidcIssuerLocation(Objects.requireNonNull(issuerUri))
+                .clientId(clientId).clientSecret(clientSecret).build();
     }
 }
