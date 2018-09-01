@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .cors()
                 .and()
             .authorizeRequests()
-                .antMatchers("/**/*.{js,css}").permitAll()
+                .antMatchers("/**/*.{js,html,css}").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .oauth2Login()
