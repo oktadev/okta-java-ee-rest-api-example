@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.env = env;
     }
 
-	@Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .sessionManagement()
@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .cors()
                 .and()
             .authorizeRequests()
-                .antMatchers("/**/*.{js,html,css}").permitAll()
+                .antMatchers("/**/*.{js,css}").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .oauth2Login()
@@ -65,8 +65,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-        configuration.setAllowedMethods(Collections.singletonList("*"));
+        configuration.setAllowedMethods(Collections.singletonList("GET"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
