@@ -16,6 +16,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.ClientRegistrations;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -54,12 +56,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
             .oauth2Login()
-                .clientRegistrationRepository(clientRegistrationRepository())
-                .authorizedClientService(authorizedClientService())
                 .and()
             .oauth2()
                 .resourceServer()
-                    .jwt().jwkSetUri("https://dev-737523.oktapreview.com/oauth2/default/v1/keys");
+                    .jwt();
+    }
+
+    @Bean
+    JwtDecoder jwtDecoder() {
+        String PROVIDER_KEY = "spring.security.oauth2.client.provider.";
+        String issuerUri = env.getProperty(PROVIDER_KEY + "okta.issuer-uri");
+        return JwtDecoders.fromOidcIssuerLocation(issuerUri);
     }
 
     @Bean
