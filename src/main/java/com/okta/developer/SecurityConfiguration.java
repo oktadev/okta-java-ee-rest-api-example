@@ -33,9 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final String issuerUri;
 
     @Autowired
-    public SecurityConfiguration(@Value("${spring.security.oauth2.client.provider.okta.issuer-uri}") String issuerUri,
-            @Value("${spring.security.oauth2.client.registration.okta.client-id}") String clientId,
-            @Value("${spring.security.oauth2.client.registration.okta.client-secret}") String clientSecret) {
+    public SecurityConfiguration(@Value("${okta.issuer-uri}") String issuerUri,
+            @Value("${okta.client-id}") String clientId,
+            @Value("${okta.client-secret}") String clientSecret) {
         this.issuerUri = issuerUri;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
