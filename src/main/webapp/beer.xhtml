@@ -14,6 +14,7 @@
                 <h:outputText value='Add'/>
                 <h:commandButton action="#{beerBean.add}" value="Add"/>
             </h:panelGrid>
+            <input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}"/>
         </h:form>
     </f:view>
 </h:body>
