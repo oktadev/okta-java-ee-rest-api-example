@@ -17,7 +17,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <javaee-api.version>7.0</javaee-api.version>
-        <tomee.version>7.0.5</tomee.version>
+        <tomee.version>7.1.0</tomee.version>
         <pac4j-j2e.version>4.0.0</pac4j-j2e.version>
         <pac4j.version>3.0.0</pac4j.version>
     </properties>
