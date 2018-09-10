@@ -57,9 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .oauth2Login()
                 .and()
-            .oauth2()
-                .resourceServer()
-                    .jwt();
+            .oauth2ResourceServer()
+                .jwt();
     }
 
     @Bean
@@ -92,6 +91,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private ClientRegistration getRegistration() {
         return ClientRegistrations.fromOidcIssuerLocation(this.issuerUri)
+                .registrationId("okta")
                 .clientId(this.clientId)
                 .clientSecret(this.clientSecret)
                 .build();
