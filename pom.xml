@@ -17,7 +17,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <javaee-api.version>7.0</javaee-api.version>
-        <tomee.version>7.0.5</tomee.version>
+        <tomee.version>7.1.0</tomee.version>
         <spring-security.version>5.1.0.RC1</spring-security.version>
         <spring.version>5.1.0.RC2</spring.version>
         <jackson.version>2.9.6</jackson.version>
