@@ -37,7 +37,7 @@ public class SecurityConfigFactory implements ConfigFactory {
         oidcConfiguration.setUseNonce(true);
         final OidcClient<OidcProfile, OidcConfiguration> oidcClient = new OidcClient<>(oidcConfiguration);
         oidcClient.setAuthorizationGenerator((ctx, profile) -> {
-            profile.addRole("ROLE_ADMIN");
+            profile.addRole("ROLE_USER");
             return profile;
         });
 
