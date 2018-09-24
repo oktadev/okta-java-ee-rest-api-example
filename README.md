@@ -2,7 +2,7 @@
  
 This example app shows how to build a Java EE REST API and secure it with JWT and OIDC.
 
-Please read [Build a Java EE REST API; Secure it with JWT and OIDC]() to see how this app was created.
+Please read [Build a Java REST API with Java EE and OIDC](https://developer.okta.com/blog/2018/09/12/secure-java-ee-rest-api) to see how this app was created.
 
 **Prerequisites:** [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html), [Maven](https://maven.apache.org), and an [Okta Developer Account](https://developer.okta.com).
 
@@ -177,7 +177,7 @@ This example uses the following open source libraries:
 
 ## Help
 
-Please post any questions as comments on the [blog post](), or visit our [Okta Developer Forums](https://devforum.okta.com/). You can also email developers@okta.com if you'd like to create a support ticket.
+Please post any questions as comments on the [blog post](https://developer.okta.com/blog/2018/09/12/secure-java-ee-rest-api), or visit our [Okta Developer Forums](https://devforum.okta.com/). You can also email developers@okta.com if you'd like to create a support ticket.
 
 ## License
 
